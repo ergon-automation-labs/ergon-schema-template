@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ergon-automation-labs.github.io/schemas/example/event.schema.json",
+  "title": "Example Event",
+  "description": "An example event published when something happens",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique event identifier (UUID)"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event occurred (ISO 8601)"
+    },
+    "subject": {
+      "type": "string",
+      "description": "NATS subject this event came from"
+    },
+    "data": {
+      "type": "object",
+      "description": "Event-specific payload",
+      "properties": {
+        "resource_id": { "type": "string" },
+        "action": { "type": "string", "enum": ["created", "updated", "deleted"] },
+        "details": { "type": "object" }
+      },
+      "required": ["resource_id", "action"]
+    }
+  },
+  "required": ["id", "timestamp", "subject", "data"]
+}
