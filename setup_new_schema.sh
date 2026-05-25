@@ -8,7 +8,7 @@ read -p "Schema name (snake_case, e.g. my_bot_schemas): " SCHEMA_APP_NAME
 read -p "Description (e.g. Schemas for MyBot): " SCHEMA_DESCRIPTION
 
 # Convert to camel case
-SCHEMA_APP_NAME_CAMEL=$(echo "$SCHEMA_APP_NAME" | sed 's/_\([a-z]\)/\U\1/g' | sed 's/^\([a-z]\)/\U\1/')
+SCHEMA_APP_NAME_CAMEL=$(echo "$SCHEMA_APP_NAME" | perl -pe 's/(?:^|_)(.)/uc($1)/ge')
 
 echo ""
 echo "Creating schemas: $SCHEMA_APP_NAME"
